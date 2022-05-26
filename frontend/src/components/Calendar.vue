@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-sheet height="100vh">
+    <v-sheet height="6vh" class="d-flex align-center">
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      </v-sheet>
+    <v-sheet height="94vh">
       <v-calendar
         v-model="value"
         :events="events"
@@ -11,6 +14,7 @@
 </template>
 
 <script>
+import { format } from 'date-fns';
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -21,6 +25,9 @@ export default {
   }),
   computed: {
     ...mapGetters("events", ["events"]),
+  title() {
+        return format(this.value, 'yyyy年 M月');
+      },
   },
   methods: {
     ...mapActions("events", ["fetchEvents"]),
